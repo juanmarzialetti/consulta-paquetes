@@ -1,5 +1,5 @@
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbzNI-k5teTIZPAL7blJHVVGVieIGPL3EI49ocTx-O5SpKRxL8iKiCrj5hJSPTLcMgAsqw/exec";
+    "https://sparkling-meadow-f10cconsulta-paquetes-api.juanantoniomarzialetti.workers.dev/";
 
 document
 .getElementById("btnConsultar")
