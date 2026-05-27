@@ -31,7 +31,24 @@ function consultarPaquete() {
     const callbackName =
         "callbackConsulta_" + Date.now();
 
+    const script =
+        document.createElement("script");
+
+    const timeout =
+        setTimeout(() => {
+
+            resultado.innerHTML =
+                "No se pudo consultar. Intentá nuevamente.";
+
+            delete window[callbackName];
+
+            script.remove();
+
+        }, 10000);
+
     window[callbackName] = function(data) {
+
+        clearTimeout(timeout);
 
         resultado.innerHTML =
             `<strong>${data.mensaje}</strong>`;
@@ -41,8 +58,17 @@ function consultarPaquete() {
         script.remove();
     };
 
-    const script =
-        document.createElement("script");
+    script.onerror = function() {
+
+        clearTimeout(timeout);
+
+        resultado.innerHTML =
+            "Error conectando con el servicio.";
+
+        delete window[callbackName];
+
+        script.remove();
+    };
 
     script.src =
         `${API_URL}?tracking=${encodeURIComponent(tracking)}&api=1&callback=${callbackName}`;

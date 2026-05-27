@@ -14,9 +14,14 @@
         <p>Ingresá tu código HC/TN para saber si está disponible para retirar.</p>
 
         <input
-            id="tracking"
-            type="text"
+            id="tracking1"
             placeholder="Ej: HC336006167AR"
+            required
+            onkeydown="
+                if(event.key==='Enter'){
+                    consultar();
+                }
+            "
         >
 
         <button id="btnConsultar">
