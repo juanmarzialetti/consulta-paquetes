@@ -9,6 +9,85 @@ body {
     max-width: 420px;
     margin: 60px auto;
     background: white;
+    padding: 26px;
+    border-radius: 14px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+    color: #152663;
+}
+
+p {
+    color: #555;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    margin-top: 16px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 14px;
+    background: #152663;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0f1c4a;
+}
+
+#resultado {
+    margin-top: 22px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.disponible {
+    color: #188038;
+}
+
+.no-disponible {
+    color: #b06000;
+}
+
+.no-encontrado {
+    color: #c5221f;
+}
+
+small {
+    display: block;
+    margin-top: 20px;
+    color: #777;
+}
+
+
+
+
+/* body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.card {
+    max-width: 420px;
+    margin: 60px auto;
+    background: white;
     padding: 24px;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0,0,0,.12);
@@ -32,4 +111,4 @@ button {
 #resultado {
     margin-top: 20px;
     font-size: 18px;
-}
+} */

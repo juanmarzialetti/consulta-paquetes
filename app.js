@@ -3,9 +3,25 @@ const API_URL =
 
 document
 .getElementById("btnConsultar")
-.addEventListener("click", consultarPaquete);
+.addEventListener(
+    "click",
+    consultarPaquete
+);
 
-function consultarPaquete() {
+document
+.getElementById("tracking")
+.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (event.key === "Enter") {
+
+            consultarPaquete();
+        }
+    }
+);
+
+async function consultarPaquete() {
 
     const tracking =
         document
@@ -28,50 +44,33 @@ function consultarPaquete() {
     resultado.innerHTML =
         "Consultando...";
 
-    const callbackName =
-        "callbackConsulta_" + Date.now();
+    try {
 
-    const script =
-        document.createElement("script");
+        const url =
+            `${API_URL}?tracking=${encodeURIComponent(tracking)}&api=1`;
 
-    const timeout =
-        setTimeout(() => {
+        const response =
+            await fetch(
+                url,
+                {
+                    redirect:
+                        "follow"
+                }
+            );
 
-            resultado.innerHTML =
-                "No se pudo consultar. Intentá nuevamente.";
-
-            delete window[callbackName];
-
-            script.remove();
-
-        }, 10000);
-
-    window[callbackName] = function(data) {
-
-        clearTimeout(timeout);
+        const data =
+            await response.json();
 
         resultado.innerHTML =
             `<strong>${data.mensaje}</strong>`;
 
-        delete window[callbackName];
+    } catch (error) {
 
-        script.remove();
-    };
-
-    script.onerror = function() {
-
-        clearTimeout(timeout);
+        console.error(
+            error
+        );
 
         resultado.innerHTML =
-            "Error conectando con el servicio.";
-
-        delete window[callbackName];
-
-        script.remove();
-    };
-
-    script.src =
-        `${API_URL}?tracking=${encodeURIComponent(tracking)}&api=1&callback=${callbackName}`;
-
-    document.body.appendChild(script);
+            "No se pudo consultar. Intentá nuevamente.";
+    }
 }
