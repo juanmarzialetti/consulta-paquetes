@@ -5,7 +5,7 @@ document
 .getElementById("btnConsultar")
 .addEventListener("click", consultarPaquete);
 
-async function consultarPaquete() {
+function consultarPaquete() {
 
     const tracking =
         document
@@ -28,25 +28,24 @@ async function consultarPaquete() {
     resultado.innerHTML =
         "Consultando...";
 
-    try {
+    const callbackName =
+        "callbackConsulta_" + Date.now();
 
-        const url =
-            `${API_URL}?tracking=${encodeURIComponent(tracking)}&api=1`;
-
-        const response =
-            await fetch(url);
-
-        const data =
-            await response.json();
+    window[callbackName] = function(data) {
 
         resultado.innerHTML =
             `<strong>${data.mensaje}</strong>`;
 
-    } catch (error) {
+        delete window[callbackName];
 
-        console.error(error);
+        script.remove();
+    };
 
-        resultado.innerHTML =
-            "No se pudo consultar. Intentá nuevamente.";
-    }
+    const script =
+        document.createElement("script");
+
+    script.src =
+        `${API_URL}?tracking=${encodeURIComponent(tracking)}&api=1&callback=${callbackName}`;
+
+    document.body.appendChild(script);
 }
